@@ -1426,10 +1426,19 @@ Puppet::Type.newtype(:firewall) do
     end
   end
 
-  newproperty(:string, :required_features => :string_matching) do
+  newproperty(:string_string, :required_features => :string_matching) do
     desc <<-EOS
-      String matching feature. Matches the packet against the pattern
-      given as an argument.
+      String matching feature, matching a text string.
+    EOS
+
+    munge do |value|
+       value = "'" + value + "'"
+    end
+  end
+
+  newproperty(:string_hexstring, :required_features => :string_matching) do
+    desc <<-EOS
+      String matching feature, matching a hexadecimal string.
     EOS
 
     munge do |value|
